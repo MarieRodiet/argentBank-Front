@@ -26,10 +26,11 @@ export const fetchUserByInputs = createAsyncThunk(
             let data = await response.json()
             console.log('fetchUserByInputs => response', data)
             if (response.status === 200) {
-                localStorage.setItem('token', data.body.token)
                 return {
                     ...data,
-                    keepToken: rememberMe
+                    keepToken: rememberMe,
+                    token: data.body.token
+                    
                 };
             } else
                 return thunkAPI.rejectWithValue(data)
@@ -48,7 +49,8 @@ export const loginSlice = createSlice({
         hasError: false,
         errorMessage: '',
         isLogged: false,
-        keepToken: false
+        keepToken: false,
+        token: ''
     },
     /*The reducers property both creates an action creator function and 
     responds to that action in this slice reducer. */
@@ -58,11 +60,12 @@ export const loginSlice = createSlice({
             state.isFetching = false
             state.errorMessage = ''
             state.isLogged = false
+            state.token = ''
             return state
         },
         clearToken: (state) => {
-            window.localStorage.removeItem('token')
             state.keepToken = false
+            state.token = ''
             return state
         }
     },
@@ -71,6 +74,7 @@ export const loginSlice = createSlice({
     extraReducers: {
         [fetchUserByInputs.fulfilled]: (state, { payload }) => {
             state.keepToken = payload.keepToken
+            state.token = payload.token
             state.isFetching = false
             state.isLogged = true
             return state

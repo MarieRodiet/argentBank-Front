@@ -1,7 +1,7 @@
 import { clearUserState, editUserInfo } from '../features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginState } from '../features/loginSlice'
-import { fetchUserData, fetchEditUserData, userState } from '../features/userSlice'
+import { fetchUserData, userState } from '../features/userSlice'
 import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import EditUserData from '../components/EditUserData'
@@ -10,25 +10,22 @@ export default function Profile() {
   const dispatch = useDispatch()
 
   const { isFetching, hasError, errorMessage, firstname, lastname, toEdit } = useSelector(userState)
-  const { isLogged } = useSelector(loginState)
+  const { isLogged, token } = useSelector(loginState)
 
   useEffect(() => {
     if (hasError) {
       console.log(errorMessage)
       dispatch(clearUserState())
     }
-    const token = localStorage.getItem('token')
-    if (token) {
-      dispatch(
-        fetchUserData({
-          token,
-        })
-      )
-    }
-  }, [hasError, dispatch, errorMessage])
+
+    dispatch(
+      fetchUserData({
+        token,
+      })
+    )
+  }, [toEdit])
 
   function showEditInput(e) {
-    console.log('inside showEditInput')
     e.preventDefault()
     dispatch(editUserInfo())
   }
@@ -42,10 +39,13 @@ export default function Profile() {
           <br />
           {isFetching ? 'Dear customer' : firstname + ' ' + lastname}!
         </h1>
-        <button className="edit-button" onClick={showEditInput}>
-          Edit Name
-        </button>
-        {toEdit ? (<EditUserData firstname={firstname} lastname={lastname} />) : ""}
+        {toEdit ? (
+          <EditUserData />
+        ) : (
+          <button className="edit-button" onClick={showEditInput}>
+            Edit Name
+          </button>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">

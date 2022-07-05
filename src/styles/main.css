@@ -5,6 +5,51 @@
   font-weight: 500;
 }
 
+.edit-info-container-title {
+  color: #00bc77;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-info-container-form {
+  height: fit-content;
+  width: 50%;
+  margin: 0 25%;
+}
+
+.edit-info-container-form-inputs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.edit-info-inputs {
+  padding: 10px;
+  margin: 0 10px;
+  font-size: 1.2rem;
+}
+
+.hidden-label {
+  display: none;
+}
+
+.edit-info-buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.edit-info-buttons-container-btn {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  align-self: center;
+}
+
 html {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

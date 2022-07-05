@@ -19,7 +19,7 @@ export default function SignIn() {
       console.log(errorMessage)
       dispatch(clearLoginState())
     }
-  }, [hasError, dispatch, errorMessage])
+  }, [])
 
   return (
     <main className="main bg-dark">
@@ -36,6 +36,7 @@ export default function SignIn() {
               type="text"
               name="email"
               autoComplete="email"
+              placeholder="your@email.com"
               {...register('email', { required: true })}
             />
           </div>
@@ -46,6 +47,7 @@ export default function SignIn() {
               id="password"
               type="password"
               name="password"
+              placeholder="password"
               autoComplete="current-password"
               {...register('password', { required: true })}
             />

@@ -31,11 +31,7 @@ export const fetchUserData = createAsyncThunk(
 
 export const fetchEditUserData = createAsyncThunk(
     'userEditData',
-    async ({ firstname, lastname }, thunkAPI) => {
-        const token = localStorage.getItem('token')
-        console.log("firstname" + firstname)
-        console.log("lastname" + lastname)
-        console.log("token" + token)
+    async ({ firstname, lastname, token }, thunkAPI) => {
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile',
                 {
@@ -91,6 +87,9 @@ export const userSlice = createSlice({
         },
         editUserInfo: (state) => {
             state.toEdit = true
+        },
+        removeEdit: (state) => {
+            state.toEdit = false
         }
     },
     extraReducers: {
@@ -129,5 +128,5 @@ export const userSlice = createSlice({
 
 })
 
-export const { clearUserState, editUserInfo } = userSlice.actions
+export const { clearUserState, editUserInfo, removeEdit } = userSlice.actions
 export const userState = (state) => state.user
