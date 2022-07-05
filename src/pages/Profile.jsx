@@ -1,37 +1,51 @@
-import { Navigate } from 'react-router-dom'
-import { loginState, clearState } from '../features/loginSlice'
+import { clearUserState, editUserInfo } from '../features/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { userState } from '../features/userSlice'
-import { fetchUserData } from '../features/userSlice'
+import { loginState } from '../features/loginSlice'
+import { fetchUserData, fetchEditUserData, userState } from '../features/userSlice'
 import { useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
+import EditUserData from '../components/EditUserData'
 
 export default function Profile() {
   const dispatch = useDispatch()
 
-  const { isFetching, isError, errorMessage, firstname, lastname } = useSelector(userState)
+  const { isFetching, hasError, errorMessage, firstname, lastname, toEdit } = useSelector(userState)
+  const { isLogged } = useSelector(loginState)
 
   useEffect(() => {
-    // if (isError) {
-    //   console.log(errorMessage)
-    //   dispatch(clearState())
-    // }
+    if (hasError) {
+      console.log(errorMessage)
+      dispatch(clearUserState())
+    }
     const token = localStorage.getItem('token')
-    dispatch(
-      fetchUserData({
-        token,
-      })
-    )
-  }, [isError, dispatch, errorMessage])
+    if (token) {
+      dispatch(
+        fetchUserData({
+          token,
+        })
+      )
+    }
+  }, [hasError, dispatch, errorMessage])
+
+  function showEditInput(e) {
+    console.log('inside showEditInput')
+    e.preventDefault()
+    dispatch(editUserInfo())
+  }
 
   return (
     <main className="main bg-dark">
+      {(!isLogged || hasError) && <Navigate to="/signin" replace={true} />}
       <div className="header">
         <h1>
           Welcome back
           <br />
-          {firstname + ' ' + lastname}!
+          {isFetching ? 'Dear customer' : firstname + ' ' + lastname}!
         </h1>
-        <button className="edit-button">Edit Name</button>
+        <button className="edit-button" onClick={showEditInput}>
+          Edit Name
+        </button>
+        {toEdit ? (<EditUserData firstname={firstname} lastname={lastname} />) : ""}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">

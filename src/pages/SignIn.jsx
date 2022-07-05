@@ -8,18 +8,18 @@ export default function SignIn() {
   const dispatch = useDispatch()
   const { register, handleSubmit } = useForm()
 
-  const { isFetching, isError, errorMessage, isLogged } = useSelector(loginState)
+  const { isFetching, hasError, errorMessage, isLogged } = useSelector(loginState)
 
   function onSubmit(data) {
     dispatch(fetchUserByInputs(data))
   }
 
   useEffect(() => {
-    if (isError) {
+    if (hasError) {
       console.log(errorMessage)
       dispatch(clearLoginState())
     }
-  }, [isError, dispatch, errorMessage])
+  }, [hasError, dispatch, errorMessage])
 
   return (
     <main className="main bg-dark">

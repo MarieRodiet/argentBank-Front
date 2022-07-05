@@ -8,7 +8,6 @@ callback that does the actual async logic and returns a promise with the result.
 export const fetchUserByInputs = createAsyncThunk(
     'login',
     async ({ email, password, rememberMe }, thunkAPI) => {
-        console.log(rememberMe)
         try {
             const response = await fetch(
                 'http://localhost:3001/api/v1/user/login',
@@ -30,7 +29,6 @@ export const fetchUserByInputs = createAsyncThunk(
                 localStorage.setItem('token', data.body.token)
                 return {
                     ...data,
-                    email: email,
                     keepToken: rememberMe
                 };
             } else
@@ -46,9 +44,8 @@ export const fetchUserByInputs = createAsyncThunk(
 export const loginSlice = createSlice({
     name: 'loginReducer',
     initialState: {
-        email: '',
         isFetching: false,
-        isError: false,
+        hasError: false,
         errorMessage: '',
         isLogged: false,
         keepToken: false
@@ -57,8 +54,7 @@ export const loginSlice = createSlice({
     responds to that action in this slice reducer. */
     reducers: {
         clearLoginState: (state) => {
-            state.email = ''
-            state.isError = false
+            state.hasError = false
             state.isFetching = false
             state.errorMessage = ''
             state.isLogged = false
@@ -74,18 +70,15 @@ export const loginSlice = createSlice({
      * that you have already defined somewhere else */
     extraReducers: {
         [fetchUserByInputs.fulfilled]: (state, { payload }) => {
-            state.email = payload.email
             state.keepToken = payload.keepToken
             state.isFetching = false
-            state.errorMessage = ''
             state.isLogged = true
             return state
         },
         [fetchUserByInputs.rejected]: (state, { payload }) => {
             console.log('payload', payload)
-            state.email = ''
             state.isFetching = false
-            state.isError = true
+            state.hasError = true
             state.errorMessage = payload.message
             state.isLogged = false
             return state
