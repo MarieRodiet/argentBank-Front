@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 export const fetchUserData = createAsyncThunk(
-    'userData',
+    'user',
     async ({ token }, thunkAPI) => {
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile',
@@ -30,7 +30,7 @@ export const fetchUserData = createAsyncThunk(
 )
 
 export const fetchEditUserData = createAsyncThunk(
-    'userEditData',
+    'user',
     async ({ firstname, lastname, token }, thunkAPI) => {
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile',
@@ -64,7 +64,7 @@ export const fetchEditUserData = createAsyncThunk(
 )
 
 export const userSlice = createSlice({
-    name: 'userReducer',
+    name: 'user',
     initialState: {
         email: '',
         firstname: '',
@@ -106,7 +106,7 @@ export const userSlice = createSlice({
             return state
         },
         [fetchUserData.pending]: (state) => {
-            state.hasFetching = true
+            state.isFetching = true
             return state
         },
         [fetchEditUserData.fulfilled]: (state, { payload }) => {
@@ -121,7 +121,7 @@ export const userSlice = createSlice({
             return state
         },
         [fetchEditUserData.pending]: (state, { payload }) => {
-            state.hasFetching = true
+            state.isFetching = true
             return state
         }
     }

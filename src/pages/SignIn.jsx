@@ -16,10 +16,10 @@ export default function SignIn() {
 
   useEffect(() => {
     if (hasError) {
-      console.log(errorMessage)
+      alert(errorMessage)
       dispatch(clearLoginState())
     }
-  }, [])
+  }, [hasError, isFetching, errorMessage, dispatch])
 
   return (
     <main className="main bg-dark">

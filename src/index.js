@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
-import {store }from './features/store.js';
+import {store, persistor }from './features/store.js';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Nav from './components/Nav';
@@ -14,7 +14,7 @@ import Error from './pages/Error.jsx';
 
 
 // REDUX-PERSIST
-//import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -22,7 +22,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      {/* <PersistGate persistor={persistor}> */}
+      <PersistGate persistor={persistor}>
       <BrowserRouter>
         <Nav />
         <Routes>
@@ -33,7 +33,7 @@ root.render(
         </Routes>
         <Footer />
       </BrowserRouter>
-      {/* </PersistGate> */}
+      </PersistGate>
     </ReduxProvider>
 
   </React.StrictMode >

@@ -30,7 +30,7 @@ export const fetchUserByInputs = createAsyncThunk(
                     ...data,
                     keepToken: rememberMe,
                     token: data.body.token
-                    
+
                 };
             } else
                 return thunkAPI.rejectWithValue(data)
@@ -43,7 +43,7 @@ export const fetchUserByInputs = createAsyncThunk(
 
 
 export const loginSlice = createSlice({
-    name: 'loginReducer',
+    name: 'login',
     initialState: {
         isFetching: false,
         hasError: false,
