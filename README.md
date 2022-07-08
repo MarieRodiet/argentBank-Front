@@ -16,5 +16,5 @@
 - Clone this backend [repo](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git) and follow the instructions of its README file. Make sure it's running on your local machine by viewing [this swagger file](http://localhost:3001/api-docs/)
 - In the root folder of the project, clone my [repo](https://github.com/MarieRodiet/argentBank-Front.git)
 - `cd argentbank`
-- `npm install`
-- `npm run start`
+- `yarn install`
+- `yarn run start`
