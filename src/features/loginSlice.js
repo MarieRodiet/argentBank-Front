@@ -1,10 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-/*provide a string for the action type prefix and a payload creator 
-callback that does the actual async logic and returns a promise with the result.
- In return, createAsyncThunk will give you a thunk that will take care of 
- dispatching the right actions based on the promise you return, 
- and action types that you can handle in your reducer */
+
 export const fetchUserByInputs = createAsyncThunk(
     'login',
     async ({ email, password, rememberMe }, thunkAPI) => {
@@ -41,7 +37,20 @@ export const fetchUserByInputs = createAsyncThunk(
     }
 )
 
-
+/**
+ * Login Slice (State + Reducer + Actions)
+ * @param {object} initialState       
+ * @param {object} state
+ * 
+ * properties =>
+ * @param {boolean} isFetching   isFetching data
+ * @param {boolean} hasError     fetching caused an hasError
+ * @param {string} errorMessage  errorMessage
+ * @param {boolean} isLogged     user isLogged
+ * @param {boolean} keepToken    user wants to keep the token
+ * @param {string} token         user token
+ * 
+ */
 export const loginSlice = createSlice({
     name: 'login',
     initialState: {

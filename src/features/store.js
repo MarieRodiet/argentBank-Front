@@ -12,15 +12,19 @@ const persistConfig = {
 
 const persistedLoginReducer = persistReducer(persistConfig, loginSlice.reducer);
 const persistedUserReducer = persistReducer(persistConfig, userSlice.reducer);
+
+
 export const store = configureStore({
   reducer: {
     login: persistedLoginReducer,
     user: persistedUserReducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
     serializableCheck: false
   })
 });
+
 
 export const persistor = persistStore(store)
 

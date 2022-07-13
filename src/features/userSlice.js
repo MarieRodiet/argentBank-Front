@@ -63,10 +63,24 @@ export const fetchEditUserData = createAsyncThunk(
     }
 )
 
+/**
+ * User Slice (State + Reducer + Actions)
+ * @param {object} initialState       
+ * @param {object} state
+ * 
+ * properties =>
+ * @param {string} email         user email
+ * @param {string} firstname     user firstname
+ * @param {string} lastname      user lastname
+ * @param {boolean} isFetching   isFetching
+ * @param {boolean} hasError     hasError
+ * @param {string} errorMessage  errorMessage
+ * @param {boolean} toEdit:      toEdit
+ * 
+ */
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        email: '',
         firstname: '',
         lastname: '',
         isFetching: false,
@@ -76,7 +90,6 @@ export const userSlice = createSlice({
     },
     reducers: {
         clearUserState: (state) => {
-            state.email = ''
             state.firstname = ''
             state.lastname = ''
             state.isFetching = false
@@ -94,7 +107,6 @@ export const userSlice = createSlice({
     },
     extraReducers: {
         [fetchUserData.fulfilled]: (state, { payload }) => {
-            state.email = payload.body.email
             state.firstname = payload.body.firstName
             state.lastname = payload.body.lastName
             state.isFetching = false

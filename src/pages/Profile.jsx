@@ -4,7 +4,7 @@ import { loginState } from '../features/loginSlice'
 import { fetchUserData, userState } from '../features/userSlice'
 import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import EditUserData from '../components/EditUserData'
+import EditUserData from '../components/EditUser'
 
 export default function Profile() {
   const dispatch = useDispatch()
@@ -31,7 +31,7 @@ export default function Profile() {
   }
 
   return (
-    <main className="main bg-dark">
+    <main className="main-profile">
       {(!isLogged || hasError) && <Navigate to="/signin" replace={true} />}
       <div className="header">
         <h1>

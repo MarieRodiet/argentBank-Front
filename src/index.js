@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider as ReduxProvider } from 'react-redux';
-import {store, persistor }from './features/store.js';
+import { store, persistor } from './features/store.js';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Nav from './components/Nav';
@@ -9,6 +9,10 @@ import Footer from './components/Footer';
 import reportWebVitals from './reportWebVitals';
 import SignIn from './pages/SignIn.jsx';
 import './styles/main.css';
+import './styles/error.css';
+import './styles/profile.css';
+import './styles/home.css';
+import './styles/signin.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Error from './pages/Error.jsx';
 
@@ -23,19 +27,18 @@ root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <PersistGate persistor={persistor}>
-      <BrowserRouter>
-        <Nav />
-        <Routes>
-          <Route path="" element={<Home />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+        <BrowserRouter>
+          <Nav />
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
       </PersistGate>
     </ReduxProvider>
-
   </React.StrictMode >
 );
 

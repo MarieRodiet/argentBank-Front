@@ -56,7 +56,13 @@ export default function SignIn() {
             <label htmlFor="remember-me">Remember me</label>
             <input type="checkbox" name="rememberMe" {...register('rememberMe')} value="true" />
           </div>
-          {isFetching ? <button disabled>Fetching</button> : <button type="submit">Sign In</button>}
+          {isFetching ? (
+            <button disabled>Fetching</button>
+          ) : (
+            <button type="submit" className="sign-in-button">
+              Sign In
+            </button>
+          )}
         </form>
       </section>
     </main>
