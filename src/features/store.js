@@ -8,7 +8,6 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  stateReconciler: autoMergeLevel2
 };
 
 const persistedLoginReducer = persistReducer(persistConfig, loginSlice.reducer);
@@ -23,8 +22,8 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-    serializableCheck: false
-  })
+      serializableCheck: false
+    })
 });
 
 
