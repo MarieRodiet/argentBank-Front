@@ -8,7 +8,7 @@ import EditUserData from '../components/EditUser'
 
 export default function Profile() {
   const dispatch = useDispatch()
-
+ //access the state data, in which a change triggers a render
   const { isFetching, hasError, errorMessage, firstname, lastname, toEdit } = useSelector(userState)
   const { isLogged, token } = useSelector(loginState)
 
@@ -18,13 +18,15 @@ export default function Profile() {
       dispatch(clearUserState())
     }
 
+    //fetch user data from backend using token
     dispatch(
       fetchUserData({
-        token,
+        token
       })
     )
   }, [toEdit])
 
+  
   function showEditInput(e) {
     e.preventDefault()
     dispatch(editUserInfo())

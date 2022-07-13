@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-
+/*SignIn dispatches this thunk and returns a promise with
+the action type and payload taken care of in the login reducer*/
 export const fetchUserByInputs = createAsyncThunk(
     'login',
     async ({ email, password, rememberMe }, thunkAPI) => {
@@ -78,8 +79,8 @@ export const loginSlice = createSlice({
             return state
         }
     },
-    /**The extraReducers allows you to respond to an action 
-     * that you have already defined somewhere else */
+    /**The extraReducers allows to respond to the action 
+     defined in the thunk*/
     extraReducers: {
         [fetchUserByInputs.fulfilled]: (state, { payload }) => {
             state.keepToken = payload.keepToken
@@ -106,6 +107,5 @@ export const loginSlice = createSlice({
 
 export const { clearLoginState, clearToken } = loginSlice.actions
 
-// const { errorMessage, isLogged } = useSelector(loginState)
 //used useSelector(loginState) to access the state + renders again when changed
 export const loginState = (state) => state.login

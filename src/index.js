@@ -19,13 +19,14 @@ import Error from './pages/Error.jsx';
 
 // REDUX-PERSIST
 import { PersistGate } from 'redux-persist/integration/react';
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
+      {/* PersistGate delays the rendering of your app's UI until your 
+      persisted state has been retrieved and saved to redux. */}
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           <Nav />

@@ -9,7 +9,6 @@ import { userState } from '../features/userSlice'
 export default function Nav() {
   const { isLogged, keepToken } = useSelector(loginState)
   const { firstname } = useSelector(userState)
-  //if isLogged, get the user to add instead of Tony
   const dispatch = useDispatch()
 
   function handleLogout() {

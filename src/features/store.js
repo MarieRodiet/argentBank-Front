@@ -8,12 +8,14 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
+  stateReconciler: autoMergeLevel2
 };
 
 const persistedLoginReducer = persistReducer(persistConfig, loginSlice.reducer);
 const persistedUserReducer = persistReducer(persistConfig, userSlice.reducer);
 
-
+/*the redux persisted state in storage
+overrides the initial state whenever it changes*/
 export const store = configureStore({
   reducer: {
     login: persistedLoginReducer,

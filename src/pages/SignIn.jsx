@@ -7,7 +7,7 @@ import { fetchUserByInputs, loginState, clearLoginState } from '../features/logi
 export default function SignIn() {
   const dispatch = useDispatch()
   const { register, handleSubmit } = useForm()
-
+  //access the state data, in which a change triggers a render
   const { isFetching, hasError, errorMessage, isLogged } = useSelector(loginState)
 
   function onSubmit(data) {
@@ -20,7 +20,8 @@ export default function SignIn() {
       dispatch(clearLoginState())
     }
   }, [hasError, isFetching, errorMessage, dispatch])
-
+  
+  //automatic routing to /profile page if isLogged is true
   return (
     <main className="main bg-dark">
       {isLogged && <Navigate to="/profile" replace={true} />}

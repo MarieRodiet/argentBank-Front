@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
+/*Navigating to /profile dispatches this thunk and returns a 
+promise with the action type and payload taken care 
+of in the user reducer*/
 export const fetchUserData = createAsyncThunk(
     'user',
     async ({ token }, thunkAPI) => {
@@ -29,6 +32,7 @@ export const fetchUserData = createAsyncThunk(
     }
 )
 
+/*Clicking on Edit Name dispatches this thunk*/
 export const fetchEditUserData = createAsyncThunk(
     'user',
     async ({ firstname, lastname, token }, thunkAPI) => {

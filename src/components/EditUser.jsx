@@ -4,6 +4,7 @@ import { fetchEditUserData, userState, removeEdit } from '../features/userSlice.
 import { useSelector } from 'react-redux'
 import { loginState } from '../features/loginSlice.js'
 
+/*EditUser Component will show in UI if user clicks on Edit Name.*/
 export default function EditUser() {
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
